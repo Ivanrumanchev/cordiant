@@ -40,6 +40,14 @@ export default {
   padding: rem(40) 0 rem(26) 0;
   height: rem(161);
 
+  @include breakpoint('md') {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+  }
+
   @include breakpoint(sm) {
     padding: 0;
     height: rem(72);
@@ -51,7 +59,7 @@ export default {
     @include flex(flex, center, space-between, $dir: column);
 
     @include breakpoint(sm) {
-      @include flex(flex, center, space-between);
+      @include flex(flex, center, space-between, $dir: row);
       height: 100%;
       text-align: left;
     }
@@ -59,11 +67,9 @@ export default {
 
   &__share {
     margin-bottom: rem(32);
-    @include flex(flex, center, center);
 
     @include breakpoint(sm) {
       justify-content: flex-start;
-      order: 2;
       margin-bottom: 0;
     }
   }
@@ -98,10 +104,6 @@ export default {
       line-height: rem(20);
       font-weight: 400;
       color: $white;
-    }
-
-    @include breakpoint(sm) {
-      order: 1;
     }
   }
 }

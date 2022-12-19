@@ -6,7 +6,7 @@ header.header
       target="_blank"
       rel="noopener"
       qa_logo_lh_header)
-      SvgEl(:name="info.logo.main.svg" width="75px")
+      SvgEl(:name="info.logo.main.svg")
     //- Example menu button. Uncomment and style if necessary
       .header__btn(@click="toggleMenu", ref="button",
         v-if="info.menu", :class="{'header__btn--open' : isMenuOpened}")
@@ -74,6 +74,10 @@ export default {
   padding-top: 11px;
   height: rem(99);
 
+  @include breakpoint('md') {
+    padding-top: 16px;
+  }
+
   &__container {
     @include flex(flex, flex-start, space-between);
     height: 100%;
@@ -94,11 +98,21 @@ export default {
     &--main {
       height: rem(14);
       width: rem(75);
+
+      @include breakpoint('md') {
+        height: rem(18);
+        width: rem(99);
+      }
     }
 
     &--partner {
       height: rem(14);
       width: rem(116);
+
+      @include breakpoint('md') {
+        height: rem(18);
+        width: rem(154);
+      }
     }
   }
 

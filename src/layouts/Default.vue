@@ -24,12 +24,12 @@ export default {
     @include flex(flex, $dir: column);
     flex: 1 0 auto;
     // Padding for fixed header height to keep it always top
-    padding-top: rem(70);
+    // padding-top: rem(70);
 
     &__header {
       // Recommend to use position fixed for cross-browser compatibility
       // Sticky could be a bit buggy in Edge or Safari
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;

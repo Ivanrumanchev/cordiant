@@ -2,7 +2,7 @@
 .HalfExample
   HalfLayout
     template(v-slot:left)
-      .HalfExample__left TEST TEXT
+      .HalfExample__left Картинка
     template(v-slot:right)
       Header
       .HalfExample__right

@@ -37,10 +37,18 @@ export default {
 .button {
   position: relative;
   //- Just example styles to set all buttons visible
-  color: $white;
-  // height: rem(20);
+  height: rem(56);
   min-width: rem(20);
-  background-color: $lifehacker;
-  padding: 5px;
+  padding: 16px;
+  background-color: $light-blue;
+  color: $dark-blue-text;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0px 4px 52px rgba(0, 39, 66, 0.9);
+  border-radius: 3px;
+
+  @include hover {
+    background-color: $white;
+  }
 }
 </style>

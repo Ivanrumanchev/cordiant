@@ -1,3 +1,4 @@
 {
-  "example": "file::/parts/indexPage/example.json"
+  "example": "file::/parts/indexPage/example.json",
+  "main": "file::/parts/indexPage/main.json"
 }

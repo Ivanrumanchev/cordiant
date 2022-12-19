@@ -19,11 +19,11 @@ div(id="app")
 
 // import HalfExample from '@/pages/HalfExample.vue';
 
-export default {
-  // components: {
-    // HalfExample,
-    // Default,
-    // Index,
-  // },
-};
+// export default {
+//   components: {
+//     HalfExample,
+//     Default,
+//     Index,
+//   },
+// };
 </script>
