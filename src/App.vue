@@ -6,24 +6,24 @@ div(id="app")
     Index
     //- if multiple routes (uncomment router in main.js)
         and next line
-    //- router-view
+  router-view
   //- Half-layout usage example
-  HalfExample
+  //- HalfExample
 </template>
 
 <script>
 // Import layout
-import Default from '@/layouts/Default.vue';
+// import Default from '@/layouts/Default.vue';
 
-import Index from '@/pages/Index.vue';
+// import Index from '@/pages/Index.vue';
 
-import HalfExample from '@/pages/HalfExample.vue';
+// import HalfExample from '@/pages/HalfExample.vue';
 
 export default {
-  components: {
-    HalfExample,
-    Default,
-    Index,
-  },
+  // components: {
+    // HalfExample,
+    // Default,
+    // Index,
+  // },
 };
 </script>

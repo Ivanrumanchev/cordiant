@@ -1,29 +1,29 @@
 <template lang="pug">
-  header.header
-    .container.header__container
-      a.header__logo.header__logo--main(
-        :href="info.logo.main.url"
-        target="_blank"
-        rel="noopener"
-        qa_logo_lh_header)
-        SvgEl(:name="info.logo.main.svg")
-      //- Example menu button. Uncomment and style if necessary
-        .header__btn(@click="toggleMenu", ref="button",
-          v-if="info.menu", :class="{'header__btn--open' : isMenuOpened}")
-          .header__btn-ico
-            span
-          .header__btn-text(v-html="isMenuOpened ? 'Закрыть' : 'Открыть'")
-      a.header__logo.header__logo--partner(
-        v-if="info.logo.partner"
-        :href="info.logo.partner.url"
-        target="_blank"
-        rel="noopener"
-        qa_logo_partner_header qa_link_external)
-        SvgEl(:name="info.logo.partner.svg")
-    //- Example menu component. Uncomment and style if necessary
-      template(v-if="info.menu")
-        transition(name="fade", mode="in-out")
-          HeaderMenu(:info="info.menu", v-if="isMenuOpened", @closeMenu="toggleMenu", ref="menu")
+header.header
+  .container.header__container
+    a.header__logo.header__logo--main(
+      :href="info.logo.main.url"
+      target="_blank"
+      rel="noopener"
+      qa_logo_lh_header)
+      SvgEl(:name="info.logo.main.svg" width="75px")
+    //- Example menu button. Uncomment and style if necessary
+      .header__btn(@click="toggleMenu", ref="button",
+        v-if="info.menu", :class="{'header__btn--open' : isMenuOpened}")
+        .header__btn-ico
+          span
+        .header__btn-text(v-html="isMenuOpened ? 'Закрыть' : 'Открыть'")
+    a.header__logo.header__logo--partner(
+      v-if="info.logo.partner"
+      :href="info.logo.partner.url"
+      target="_blank"
+      rel="noopener"
+      qa_logo_partner_header qa_link_external)
+      SvgEl(:name="info.logo.partner.svg")
+  //- Example menu component. Uncomment and style if necessary
+    template(v-if="info.menu")
+      transition(name="fade", mode="in-out")
+        HeaderMenu(:info="info.menu", v-if="isMenuOpened", @closeMenu="toggleMenu", ref="menu")
 </template>
 
 <script>
@@ -68,18 +68,20 @@ export default {
 </script>
 <style scoped lang="scss">
 .header {
-  background-color: $white;
-  box-shadow: 0 5px 10px rgba($black, 0.1);
-  height: rem(70);
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 80, 138, 0) 100%);;
+  // background: linear-gradient($black, transparent);
+  // box-shadow: 0 5px 10px rgba($black, 0.1);
+  padding-top: 11px;
+  height: rem(99);
 
   &__container {
-    @include flex(flex, center, space-between);
+    @include flex(flex, flex-start, space-between);
     height: 100%;
   }
 
   &__logo {
     svg {
-      fill: $black;
+      fill: $white;
       transition: fill $ease;
     }
 
@@ -90,13 +92,13 @@ export default {
     }
 
     &--main {
-      height: rem(19);
-      width: rem(106);
+      height: rem(14);
+      width: rem(75);
     }
 
     &--partner {
-      height: rem(18);
-      width: rem(80);
+      height: rem(14);
+      width: rem(116);
     }
   }
 

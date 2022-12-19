@@ -1,18 +1,18 @@
 <template lang="pug">
-  .HalfExample
-    HalfLayout
-      template(v-slot:left)
-        .HalfExample__left TEST TEXT
-      template(v-slot:right)
-        Header
-        .HalfExample__right
-          .HalfExample__left-text TEST TEXT
-        //- You can place elements as you need
-            For example placed footer here
-        Footer
-      //- And footer at bottom slot
-      template(v-slot:bottom)
-        Footer
+.HalfExample
+  HalfLayout
+    template(v-slot:left)
+      .HalfExample__left TEST TEXT
+    template(v-slot:right)
+      Header
+      .HalfExample__right
+        .HalfExample__left-text TEST TEXT
+      //- You can place elements as you need
+          For example placed footer here
+      Footer
+    //- And footer at bottom slot
+    template(v-slot:bottom)
+      Footer
 </template>
 
 <script>

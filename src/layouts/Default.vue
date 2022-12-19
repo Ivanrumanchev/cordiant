@@ -1,9 +1,9 @@
 <template lang="pug">
-  .default
-    Header.default__header(qa_header)
-    .default__main
-      slot
-    Footer.default__footer(qa_footer)
+.default
+  Header.default__header(qa_header)
+  .default__main
+    slot
+  Footer.default__footer(qa_footer)
 </template>
 
 <script>

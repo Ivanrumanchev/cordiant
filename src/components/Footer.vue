@@ -1,18 +1,18 @@
 <template lang="pug">
-  footer.footer(qa_footer)
-    .container.footer__container
-      Share.footer__share(:theme="'white'")
-      .footer__copyright
-        a(
-          :href="info.main.url"
-          target="_blank"
-          rel="noopener"
-          v-html="info.main.text"
-          ga_logo_lh_footer)
-        | |
-        a(v-if="info.partner" :href="info.partner.url" target="_blank" rel="noopener"
-          v-html="info.partner.text" qa_logo_partner_footer qa_link_external)
-        span © {{ getCurrentYear() }}
+footer.footer(qa_footer)
+  .container.footer__container
+    Share.footer__share(:theme="'blue'", rounded)
+    .footer__copyright
+      a(
+        :href="info.main.url"
+        target="_blank"
+        rel="noopener"
+        v-html="info.main.text"
+        ga_logo_lh_footer)
+      | |&nbsp;
+      a(v-if="info.partner" :href="info.partner.url" target="_blank" rel="noopener"
+        v-html="info.partner.text" qa_logo_partner_footer qa_link_external)
+      span © {{ getCurrentYear() }}
 </template>
 
 <script>
@@ -36,8 +36,9 @@ export default {
 
 <style scoped lang="scss">
 .footer {
-  background-color: $black;
-  padding: rem(30) 0;
+  background-color: $blue;
+  padding: rem(40) 0 rem(26) 0;
+  height: rem(161);
 
   @include breakpoint(sm) {
     padding: 0;
@@ -46,6 +47,8 @@ export default {
 
   &__container {
     text-align: center;
+    height: 100%;
+    @include flex(flex, center, space-between, $dir: column);
 
     @include breakpoint(sm) {
       @include flex(flex, center, space-between);
@@ -66,13 +69,15 @@ export default {
   }
 
   &__copyright {
-    @include fs(20, rem(26));
+    @include fs(12, 15, 700);
     @include flex(inline-flex, center);
-    color: $white;
+    color: $light-blue;
 
     a {
       color: inherit;
       margin-right: 5px;
+      text-decoration: 1px solid $light-blue;
+      text-decoration-line: underline;
 
       &:not(:first-of-type) {
         @include breakpoint(sm) {
@@ -81,7 +86,7 @@ export default {
       }
 
       @include hover(true) {
-        color: $lifehacker;
+        color: $white;
       }
 
       @include breakpoint(lg) {
@@ -91,6 +96,8 @@ export default {
 
     span {
       line-height: rem(20);
+      font-weight: 400;
+      color: $white;
     }
 
     @include breakpoint(sm) {

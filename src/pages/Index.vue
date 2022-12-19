@@ -1,14 +1,17 @@
 <template lang="pug">
-  Example(v-if="info.example" :info="info.example")
+//- Example(v-if="info.example" :info="info.example")
+Default
 </template>
 
 <script>
-import Example from '@/components/Example.vue';
+// import Example from '@/components/Example.vue';
+import Default from '@/layouts/Default.vue';
 
 export default {
   name: 'index',
   components: {
-    Example,
+    // Example,
+    Default,
   },
   data: (context) => ({
     info: context.$utils.loadJSON('indexPage.json'),

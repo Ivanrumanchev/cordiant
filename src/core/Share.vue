@@ -1,25 +1,25 @@
 <template lang="pug">
-  .share(:class="getTheme")
-    social-sharing(
-      :url="url"
-      :title="title"
-      :description="description"
-      :image="image"
-      :twitterUser="twitterUser"
-      :networkTag="networkTag"
-      :redirect="redirect"
-      @open="shareDataLayer"
-      inline-template)
-      .share__icons
-        network.share__social.share__social--tw(network="twitter")
-          svg(qa_button_share_tw)
-            use(:xlink:href="$utils.loadAsset('tw', true)")
-        network.share__social.share__social--vk(network="vk")
-          svg(qa_button_share_vk)
-            use(:xlink:href="$utils.loadAsset('vk', true)")
-        network.share__social.share__social--fb(network="facebook")
-          svg(qa_button_share_fb)
-            use(:xlink:href="$utils.loadAsset('fb', true)")
+.share(:class="getTheme")
+  social-sharing(
+    :url="url"
+    :title="title"
+    :description="description"
+    :image="image"
+    :twitterUser="twitterUser"
+    :networkTag="networkTag"
+    :redirect="redirect"
+    @open="shareDataLayer"
+    inline-template)
+    .share__icons
+      network.share__social.share__social--tw(network="twitter")
+        svg(qa_button_share_tw)
+          use(:xlink:href="$utils.loadAsset('tw', true)")
+      network.share__social.share__social--vk(network="vk")
+        svg(qa_button_share_vk)
+          use(:xlink:href="$utils.loadAsset('vk', true)")
+      network.share__social.share__social--fb(network="facebook")
+        svg(qa_button_share_fb)
+          use(:xlink:href="$utils.loadAsset('fb', true)")
 </template>
 
 <script>
@@ -74,10 +74,17 @@ export default {
       type: String,
       default: '',
     },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     getTheme() {
-      return this.theme ? `share--${this.theme}` : '';
+      return [
+        this.theme ? `share--${this.theme}` : '',
+        this.rounded ? 'share--rounded' : '',
+      ];
     },
     redirect() {
       return `${window.location.origin}/special/${this.info.settings.projectSlug}/`;
@@ -113,7 +120,7 @@ export default {
     @include flex(flex, center, center);
 
     &:not(:last-of-type) {
-      margin-right: rem(25);
+      margin-right: rem(10);
     }
 
     svg {
@@ -139,6 +146,47 @@ export default {
       @include hover() {
         svg {
           fill: $lifehacker;
+        }
+      }
+    }
+  }
+
+  &--blue {
+    #{$root}__social {
+      svg {
+        fill: $more-dark-blue;
+      }
+
+      @include hover() {
+        svg {
+          fill: $lifehacker;
+        }
+      }
+    }
+  }
+
+  &--rounded {
+    #{$root}__social {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $light-blue;
+
+      svg {
+        height: 12px;
+      }
+
+      @include hover() {
+        background-color: $white;
+
+        svg {
+          fill: $more-dark-blue;
+        }
+      }
+
+      &:last-child {
+        svg {
+          height: 15px;
         }
       }
     }

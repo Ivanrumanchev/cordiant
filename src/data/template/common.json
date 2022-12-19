@@ -4,13 +4,13 @@
     "projectName": "Foobar"
   },
   "main": {
+    "svg": "logo",
     "text": "Лайфхакер",
-    "url": "https://lifehacker.ru/",
-    "svg": "logo"
+    "url": "https://lifehacker.ru/"
   },
   "partner": {
-    "svg": "logo",
-    "text": "Partner",
+    "svg": "partner",
+    "text": "Cordiant",
     "url": ""
   },
   "title": "title",
