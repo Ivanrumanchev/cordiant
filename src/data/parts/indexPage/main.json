@@ -8,7 +8,7 @@
   },
 	"link": {
     "text": "Пройти тест!",
-    "url": "/",
-    "external": true
+    "url": "/game",
+    "external": false
   }
 }

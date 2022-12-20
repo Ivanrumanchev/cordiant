@@ -22,13 +22,13 @@ export default {
       elProps = {
         ...elProps,
         attrs: {
-          href: this.info.url,
+          to: this.info.url,
           target: this.info.external ? '_blank' : 'self',
           rel: 'noopener',
         },
       };
     }
-    return createElement(this.info.url ? 'a' : 'button', elProps);
+    return createElement(this.info.url ? 'router-link' : 'button', elProps);
   },
 };
 </script>

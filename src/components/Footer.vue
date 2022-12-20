@@ -1,7 +1,8 @@
 <template lang="pug">
 footer.footer(qa_footer)
   .container.footer__container
-    Share.footer__share(:theme="'blue'", rounded)
+    Share(v-if="!withoutShare").footer__share(:theme="'blue'", rounded)
+
     .footer__copyright
       a(
         :href="info.main.url"
@@ -20,6 +21,12 @@ import Share from '@/core/Share.vue';
 
 export default {
   name: 'Footer',
+  props: {
+    withoutShare: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: (context) => ({
     info: context.$utils.loadJSON('template/common.json'),
   }),
@@ -37,8 +44,8 @@ export default {
 <style scoped lang="scss">
 .footer {
   background-color: $blue;
-  padding: rem(40) 0 rem(26) 0;
-  height: rem(161);
+  padding-bottom: rem(26);
+  width: 100%;
 
   @include breakpoint('md') {
     position: absolute;
@@ -50,7 +57,7 @@ export default {
 
   @include breakpoint(sm) {
     padding: 0;
-    height: rem(72);
+    height: rem(66);
   }
 
   &__container {
@@ -66,18 +73,27 @@ export default {
   }
 
   &__share {
-    margin-bottom: rem(32);
+    margin-top: rem(40);
 
     @include breakpoint(sm) {
       justify-content: flex-start;
-      margin-bottom: 0;
+      margin-top: 0;
     }
   }
 
   &__copyright {
+    margin-top: rem(40);
+
     @include fs(12, 15, 700);
     @include flex(inline-flex, center);
     color: $light-blue;
+
+    @include breakpoint(sm) {
+      align-self: flex-end;
+      margin-top: 0;
+      margin-bottom: 8px;
+      margin-left: auto;
+    }
 
     a {
       color: inherit;
@@ -101,7 +117,7 @@ export default {
     }
 
     span {
-      line-height: rem(20);
+      line-height: rem(15);
       font-weight: 400;
       color: $white;
     }

@@ -24,6 +24,7 @@ export default {
     @include flex(flex, $dir: column);
     flex: 1 0 auto;
     position: relative;
+    width: 100%;
 
     &__top {
       flex-shrink: 0;
@@ -42,7 +43,7 @@ export default {
     &__content-side {
       display: flex;
       flex-direction: column;
-      flex: 1 0 auto;
+      flex: 0 0 auto;
 
       @include breakpoint(md) {
         width: 50%;
@@ -50,16 +51,24 @@ export default {
       }
 
       &--left {
-        min-height: rem(296);
         position: relative;
         overflow: hidden;
+        border-bottom: 2px solid $white;
 
         @include breakpoint(md) {
+          height: 100%;
           min-height: auto;
+          border-bottom: none;
+          border-right: 2px solid $white;
         }
       }
 
       &--right {
+        @include breakpoint(md) {
+          height: 100vh;
+          overflow: scroll;
+        }
+
         @include breakpoint(xl) {
           position: relative;
           z-index: 100;

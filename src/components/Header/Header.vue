@@ -69,13 +69,12 @@ export default {
 <style scoped lang="scss">
 .header {
   background: linear-gradient(180deg, #000000 0%, rgba(0, 80, 138, 0) 100%);;
-  // background: linear-gradient($black, transparent);
-  // box-shadow: 0 5px 10px rgba($black, 0.1);
-  padding-top: 11px;
-  height: rem(99);
+  padding-top: rem(11);
+  height: rem(60);
 
   @include breakpoint('md') {
     padding-top: 16px;
+    height: rem(110);
   }
 
   &__container {
