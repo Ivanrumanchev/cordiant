@@ -34,3 +34,12 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "play";
+  src: url("~@/assets/fonts/play-bold.woff") format("woff");
+  src: url("~@/assets/fonts/play-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

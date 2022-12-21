@@ -5,18 +5,19 @@
 	main.main
 		HalfLayout
 			template(v-slot:left)
-				picture
-					source(type="image/webp" :srcset="`${getMirrorWEBP} 1x, ${getMirrorWEBP} 2x`")
-					img.main__mirror(:src="getMirrorPNG" :srcset="`${getMirrorPNG} 2x`" alt="mirror" width="128" height="59")
+				template(v-if="!isGameOver")
+					picture
+						source(type="image/webp" :srcset="`${getMirrorWEBP} 1x, ${getMirrorWEBP} 2x`")
+						img.main__mirror(:src="getMirrorPNG" :srcset="`${getMirrorPNG} 2x`" alt="mirror" width="128" height="59")
 
-				.main__cabin
+					.main__cabin
 
 				picture
 					source(type="image/webp" :srcset="`${getPictureWEBP} 1x, ${getPictureWEBP} 2x`")
 					img.main__picture(:src="getPictureJPG" :srcset="`${getPictureJPG} 2x`" :alt="`question-${step}`" width="320" height="194")
 
 			template(v-slot:right)
-				.container
+				.container(v-if="!isGameOver")
 					.main__info-card.info-card
 						.info-card__step {{`${step}/${Object.keys(info.main.info).length}`}}
 
@@ -34,27 +35,32 @@
 
 							Button.info-card__next(:info="info.main.link" @click="onNextClick")
 
-	Footer(withoutShare).page-game--footer
+				GameOver(v-else :result="getResult" @repeat="onRepeatClick")
+
+	p.page-game__team(v-if="isGameOver") {{info.main.team}}
+	img.page-game__popup(src="../assets/images/popup.png")
+
+	Footer(withoutShare :class="{'page-game--footer': isGameOver}")
 </template>
 
 	<script>
-	import Default from '@/layouts/Default.vue';
 	import HalfLayout from '@/layouts/HalfLayout.vue';
 	import SvgEl from '@/core/SvgEl.vue';
 	import Button from '@/core/Button.vue';
 	import Header from '@/components/Header/Header.vue';
 	import Footer from '@/components/Footer.vue';
+	import GameOver from '@/components/Game-over.vue';
 
 	export default {
 		name: 'game',
 
 		components: {
-			Default,
 			HalfLayout,
 			SvgEl,
 			Button,
 			Header,
 			Footer,
+			GameOver,
 		},
 
 		data: (context) => ({
@@ -67,10 +73,14 @@
 
 		computed: {
 			getPictureJPG() {
-				return this.$utils.loadAsset(`question-${this.step}.jpg`);
+				return this.isGameOver
+					? this.$utils.loadAsset(`result-${this.getResult}.jpg`)
+					: this.$utils.loadAsset(`question-${this.step}.jpg`);
 			},
 			getPictureWEBP() {
-				return this.$utils.loadAsset(`question-${this.step}.webp`);
+				return this.isGameOver
+					? this.$utils.loadAsset(`result-${this.getResult}.webp`)
+					: this.$utils.loadAsset(`question-${this.step}.webp`);
 			},
 			getMirrorPNG() {
 				const emoji = this.currentAnswer ? this.currentAnswer.isCorrect : 'question';
@@ -82,6 +92,18 @@
 
 				return this.$utils.loadAsset(`mirror-${emoji.toString()}.webp`);
 			},
+			isGameOver() {
+				return this.step > Object.keys(this.info.main.info).length;
+			},
+			getResult() {
+				if (this.countCorrect <= 2) {
+						return 'low';
+				} else if (this.countCorrect > 2 && this.countCorrect <= 4) {
+					return 'middle';
+				} else {
+					return 'top';
+				}
+			}
 		},
 
 		methods: {
@@ -98,14 +120,22 @@
 				this.currentAnswer = null;
 				this.step++;
 			},
-		}
+			onRepeatClick() {
+				this.step = 1;
+				this.countCorrect = 0;
+				this.currentAnswer = null;
+				this.isQuestion = true;
+			},
+		},
 	};
 	</script>
 
 	<style lang="scss" scoped>
 		.page-game{
 			flex-grow: 1;
+			position: relative;
 			@include flex(flex, $dir: column);
+			background-color: $blue;
 
 			&--header {
 				position: absolute;
@@ -114,12 +144,66 @@
 				right: 0;
 				z-index: 100;
 			}
+
+			&--footer {
+				@include breakpoint('md') {
+					position: absolute;
+					bottom: 11px;
+				}
+			}
+
+			&__team {
+				margin: rem(35) auto 0 auto;
+				color: $light-blue;
+				text-decoration: 1px solid $light-blue;
+				text-decoration-line: underline;
+				background-color: $blue;
+
+				@include fs(12, 15, 700);
+
+				@include hover() {
+					cursor: pointer;
+					color: $white;
+				}
+
+				@include breakpoint('md') {
+					position: absolute;
+					left: 59%;
+					bottom: rem(19);
+					z-index: 11;
+					padding-top: 0;
+					background-color: transparent;
+				}
+
+				&:hover ~ .page-game__popup {
+					display: block;
+					position: absolute;
+					width: rem(262);
+					height: rem(193);
+
+					bottom: rem(90);
+					left: 50%;
+					transform: translateX(-50%);
+
+					@include breakpoint('sm') {
+						bottom: rem(80);
+					}
+
+					@include breakpoint('md') {
+						bottom: rem(30);
+						transform: translateX(0);
+					}
+				}
+			}
+
+			&__popup {
+				display: none;
+			}
 		}
 
 		.main {
 			flex-grow: 1;
 			@include flex(flex, center, flex-start, column);
-			background-color: $blue;
 			position: relative;
 
 			&__mirror {

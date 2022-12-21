@@ -9,6 +9,7 @@
 	"link": {
     "text": "Пройти тест!",
     "url": "/game",
-    "external": false
+    "external": false,
+    "isRouterLink": true
   }
 }

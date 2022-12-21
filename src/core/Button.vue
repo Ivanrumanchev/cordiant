@@ -19,16 +19,33 @@ export default {
       on: this.$listeners,
     };
     if (this.info.url) {
-      elProps = {
+      elProps = this.info.isRouterLink
+      ? {
         ...elProps,
         attrs: {
           to: this.info.url,
           target: this.info.external ? '_blank' : 'self',
           rel: 'noopener',
         },
+      }
+      : {
+        ...elProps,
+        attrs: {
+          href: this.info.url,
+          target: this.info.external ? '_blank' : 'self',
+          rel: 'noopener',
+        },
       };
     }
-    return createElement(this.info.url ? 'router-link' : 'button', elProps);
+
+    let elName;
+
+    if (this.info.url) {
+      elName = this.info.isRouterLink ? 'router-link' : 'a';
+    } else {
+      elName = 'button';
+    }
+    return createElement(elName, elProps);
   },
 };
 </script>
