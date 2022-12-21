@@ -1,23 +1,6 @@
 <template lang="pug">
-//- Default
-//-   main.main
-//-     HalfLayout
-//-       template(v-slot:left)
-//-         .main__preview
-//-       template(v-slot:right)
-//-         .main__info-card.info-card
-//-           .info-card__title-container
-//-             .container
-//-               h1.info-card__title
-//-                 SvgEl(:name="info.main.title.svg")
-
-//-           .info-card__info-container
-//-             p.info-card__info(v-html="info.main.info")
-
-//-             Button.info-card__begin-test(:info="info.main.link")
-
 Default
-  main.main
+  main.main(v-animate.fadeIn="")
     .main__preview
 
     .main__info-card.info-card
@@ -33,7 +16,6 @@ Default
 </template>
 
 <script>
-// import Example from '@/components/Example.vue';
 import Default from '@/layouts/Default.vue';
 import HalfLayout from '@/layouts/HalfLayout.vue';
 import SvgEl from '@/core/SvgEl.vue';
@@ -42,7 +24,6 @@ import Button from '@/core/Button.vue';
 export default {
   name: 'index',
   components: {
-    // Example,
     Default,
     HalfLayout,
     SvgEl,

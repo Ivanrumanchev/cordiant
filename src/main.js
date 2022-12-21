@@ -23,6 +23,8 @@ import plural from '@/filters/plural.js';
 */
 import router from './router';
 
+import Animate from '@/directives/animate';
+
 import './scss/_base.scss';
 import App from './App.vue';
 
@@ -51,6 +53,7 @@ Vue.use(VueScrollTo, {
   y: true,
 });
 */
+Vue.use(Animate);
 
 Vue.use(VueLazyLoad, {
   preLoad: 1.7,

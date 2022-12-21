@@ -56,7 +56,7 @@ export default {
         border-bottom: 2px solid $white;
 
         @include breakpoint(md) {
-          height: 100%;
+          min-height: 100vh;
           min-height: auto;
           border-bottom: none;
           border-right: 2px solid $white;

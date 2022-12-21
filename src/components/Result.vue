@@ -1,0 +1,78 @@
+<template lang="pug">
+.result
+	p.result__result {{currentAnswer.result}}
+
+	p.result__extra(v-if="currentAnswer.extra" v-html="currentAnswer.extra")
+
+	Button.result__next(:info="info.main.link" @click="onNextClick")
+</template>
+
+<script>
+import Button from '@/core/Button.vue';
+
+export default {
+	name: 'answer-variant',
+
+	props: {
+		info: {
+			type: Object,
+			required: true,
+		},
+		currentAnswer: {
+			type: Object,
+			required: true,
+		},
+	},
+
+	components: {
+		Button,
+	},
+
+	methods: {
+		onNextClick() {
+			this.$emit('next-click');
+		},
+	},
+};
+</script>
+		
+<style lang="scss" scoped>
+	.result {
+		&__result {
+		margin: rem(16) rem(16) rem(24) rem(16);
+
+		@include fs(18, 26, 700);
+
+		color: $white;
+
+		@include breakpoint('md') {
+			margin-top: rem(85);
+		}
+	}
+
+	&__extra {
+		margin: 0 rem(16) 0 rem(16);
+		font-weight: 400;
+		color: $white;
+
+		@include breakpoint('md') {
+			width: rem(370);
+		}
+
+		::v-deep .link {
+			color: $light-blue;
+			text-decoration: 1px solid $light-blue;
+			text-decoration-line: underline;
+			font-weight: 700;
+		}
+	}
+
+	&__next {
+		margin: rem(40) auto 0 auto;
+		display: block;
+		width: rem(250);
+		font-weight: 700;
+	}
+	}
+</style>
+		

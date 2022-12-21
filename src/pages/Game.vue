@@ -2,7 +2,7 @@
 .page-game
 	Header.page-game--header
 
-	main.main
+	main.main(v-animate.fadeIn="")
 		HalfLayout
 			template(v-slot:left)
 				template(v-if="!isGameOver")
@@ -12,30 +12,25 @@
 
 					.main__cabin
 
+				//- Transition(name="fade" mode="out-in" :duration="550")
+					//- .div(:key="getPictureJPG")
 				picture
 					source(type="image/webp" :srcset="`${getPictureWEBP} 1x, ${getPictureWEBP} 2x`")
-					img.main__picture(:src="getPictureJPG" :srcset="`${getPictureJPG} 2x`" :alt="`question-${step}`" width="320" height="194")
+					Transition(name="fade" mode="out-in")
+						img.main__picture(:src="getPictureJPG" :key="getPictureJPG" :srcset="`${getPictureJPG} 2x`" :alt="`question-${step}`" width="320" height="194")
 
 			template(v-slot:right)
-				.container(v-if="!isGameOver")
-					.main__info-card.info-card
-						.info-card__step {{`${step}/${Object.keys(info.main.info).length}`}}
+				Transition(name="fade" mode="out-in")
+					.container(v-if="!isGameOver")
+						.main__info-card.info-card
+							.info-card__step {{`${step}/${Object.keys(info.main.info).length}`}}
 
-						template(v-if="isQuestion")
-							h1.info-card__title
-								SvgEl(:name="info.main.title.svg")
+							Transition(name="fade" mode="out-in")
+								AnswerVariant(v-if="isQuestion" :info="info" :step="step" @answer-click="onAnswerClick")
 
-							ul.info-card__answer-list
-								li.info-card__answer-item(v-for="(answer, idx) of info.main.info['step-' + step]" :key="idx" @click="onAnswerClick(answer)" v-html="answer.answer")
+								Result(v-else :info="info" :current-answer="currentAnswer" @next-click="onNextClick")
 
-						template(v-else)
-							p.info-card__result {{currentAnswer.result}}
-
-							p.info-card__extra(v-if="currentAnswer.extra" v-html="currentAnswer.extra")
-
-							Button.info-card__next(:info="info.main.link" @click="onNextClick")
-
-				GameOver(v-else :result="getResult" @repeat="onRepeatClick")
+					GameOver(v-else :result="getResult" @repeat="onRepeatClick")
 
 	p.page-game__team(v-if="isGameOver") {{info.main.team}}
 	img.page-game__popup(src="../assets/images/popup.png")
@@ -45,22 +40,22 @@
 
 	<script>
 	import HalfLayout from '@/layouts/HalfLayout.vue';
-	import SvgEl from '@/core/SvgEl.vue';
-	import Button from '@/core/Button.vue';
 	import Header from '@/components/Header/Header.vue';
 	import Footer from '@/components/Footer.vue';
 	import GameOver from '@/components/Game-over.vue';
+	import AnswerVariant from '@/components/Answer-variant.vue';
+	import Result from '@/components/Result.vue';
 
 	export default {
 		name: 'game',
 
 		components: {
 			HalfLayout,
-			SvgEl,
-			Button,
 			Header,
 			Footer,
 			GameOver,
+			AnswerVariant,
+			Result,
 		},
 
 		data: (context) => ({
@@ -97,13 +92,13 @@
 			},
 			getResult() {
 				if (this.countCorrect <= 2) {
-						return 'low';
+					return 'low';
 				} else if (this.countCorrect > 2 && this.countCorrect <= 4) {
 					return 'middle';
-				} else {
-					return 'top';
 				}
-			}
+
+				return 'top';
+			},
 		},
 
 		methods: {
@@ -131,6 +126,12 @@
 	</script>
 
 	<style lang="scss" scoped>
+	.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+	}
+	.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+			opacity: 0
+	}
 		.page-game{
 			flex-grow: 1;
 			position: relative;
@@ -269,97 +270,6 @@
 				@include breakpoint('md') {
           margin-top: rem(78);
         }
-			}
-
-			&__title {
-				margin-top: rem(16);
-
-				@include breakpoint('md') {
-          margin-top: rem(27);
-        }
-
-				svg {
-					margin: 0 auto;
-					width: rem(284);
-					height: rem(43);
-
-					@include breakpoint('md') {
-						width: rem(345);
-						height: rem(52);
-					}
-				}
-			}
-
-			&__answer-list {
-				width: 100%;
-				margin-top: rem(6);
-				padding: rem(29) 0 rem(31) 0;
-				color: $white;
-
-				@include fs(14, 24);
-
-				@include breakpoint('md') {
-          padding-top: rem(20);
-					width: rem(456);
-					@include fs(16, 26);
-        }
-			}
-
-			&__answer-item {
-				min-height: rem(82);
-				background-color: $answer-color;
-				padding: rem(16) rem(20);
-				border-radius: 3px;
-
-				&:not(:last-child) {
-					margin-bottom: rem(16);
-				}
-
-				@include hover {
-					background-color: $light-blue;
-					color: $dark-blue-text;
-				}
-
-				&:active {
-					background-color: $white;
-					color: $dark-blue-text;
-				}
-			}
-
-			&__result {
-				margin: rem(16) rem(16) rem(24) rem(16);
-
-				@include fs(18, 26, 700);
-
-				color: $white;
-
-				@include breakpoint('md') {
-          margin-top: rem(85);
-        }
-			}
-
-			&__extra {
-				margin: 0 rem(16) 0 rem(16);
-				font-weight: 400;
-				color: $white;
-
-				@include breakpoint('md') {
-          width: rem(370);
-        }
-
-				::v-deep .link {
-					color: $light-blue;
-					text-decoration: 1px solid $light-blue;
-					text-decoration-line: underline;
-					font-weight: 700;
-				}
-			}
-
-			&__next {
-				margin: rem(40) auto 0 auto;
-				display: block;
-				width: rem(250);
-				font-weight: 700;
 			}
 		}
 	</style>
