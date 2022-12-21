@@ -4,7 +4,8 @@
 		SvgEl(:name="info.main.title.svg")
 
 	ul.answer-variant__answer-list
-		li.answer-variant__answer-item(v-for="(answer, idx) of info.main.info['step-' + step]" :key="idx" @click="onAnswerClick(answer)" v-html="answer.answer")
+		li.answer-variant__answer-item(v-for="(answer, idx) of info.main.info['step-' + step]" :key="idx")
+			a.answer-variant__link(@click.prevent="onAnswerClick(answer)" v-html="answer.answer" qa_quiz_answer)
 
 </template>
 	
@@ -75,17 +76,26 @@ export default {
 
 		&__answer-item {
 			min-height: rem(82);
-			background-color: $answer-color;
-			padding: rem(16) rem(20);
-			border-radius: 3px;
 
 			&:not(:last-child) {
 				margin-bottom: rem(16);
 			}
+		}
 
-			@include hover {
+		&__link {
+			display: block;
+			width: 100%;
+			height: 100%;
+			min-height: rem(82);
+			padding: rem(16) rem(20);
+			border-radius: 3px;
+			background-color: $answer-color;
+
+			&:hover {
 				background-color: $light-blue;
 				color: $dark-blue-text;
+				transition: background-color .3s ease-in;
+				cursor: pointer;
 			}
 
 			&:active {

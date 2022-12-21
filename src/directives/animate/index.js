@@ -145,7 +145,9 @@ export default {
         anim.init(el, binding);
       },
       unbind(el) {
-        anim.destroy(el);
+        if (typeof anim.destroy === 'function') {
+          anim.destroy(el);
+        }
       },
     });
   },

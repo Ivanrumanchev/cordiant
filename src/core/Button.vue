@@ -66,6 +66,7 @@ export default {
 
   @include hover {
     background-color: $white;
+    transition: background-color .25s ease-in;
   }
 }
 </style>

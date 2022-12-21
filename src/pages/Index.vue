@@ -17,7 +17,6 @@ Default
 
 <script>
 import Default from '@/layouts/Default.vue';
-import HalfLayout from '@/layouts/HalfLayout.vue';
 import SvgEl from '@/core/SvgEl.vue';
 import Button from '@/core/Button.vue';
 
@@ -25,7 +24,6 @@ export default {
   name: 'index',
   components: {
     Default,
-    HalfLayout,
     SvgEl,
     Button,
   },
@@ -38,9 +36,10 @@ export default {
 <style lang="scss" scoped>
   .main {
     flex-grow: 1;
-    @include flex(flex, center, flex-start, column);
     background-color: $dark-blue;
     position: relative;
+
+    @include flex(flex, center, flex-start, column);
 
     &__preview {
       width: 100%;

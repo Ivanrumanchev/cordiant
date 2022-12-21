@@ -178,10 +178,12 @@ export default {
 			@include hover() {
 				span {
 					color: $white;
+					transition: color .25s ease-in;
 				}
 
 				svg {
 					fill: $white;
+					transition: fill .25s ease-in;
 				}
 			}
 

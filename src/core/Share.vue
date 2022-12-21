@@ -178,9 +178,11 @@ export default {
 
       @include hover() {
         background-color: $white;
+        transition: background-color .25s ease-in;
 
         svg {
           fill: $more-dark-blue;
+          transition: fill .25s ease-in;
         }
       }
 

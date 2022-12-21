@@ -12,23 +12,19 @@
 
 					.main__cabin
 
-				//- Transition(name="fade" mode="out-in" :duration="550")
-					//- .div(:key="getPictureJPG")
-				picture
+				picture(v-animate.fadeIn="" :key="getPictureJPG")
 					source(type="image/webp" :srcset="`${getPictureWEBP} 1x, ${getPictureWEBP} 2x`")
-					Transition(name="fade" mode="out-in")
-						img.main__picture(:src="getPictureJPG" :key="getPictureJPG" :srcset="`${getPictureJPG} 2x`" :alt="`question-${step}`" width="320" height="194")
+					img.main__picture(:src="getPictureJPG" :srcset="`${getPictureJPG} 2x`" :alt="`question-${step}`" width="320" height="194")
 
 			template(v-slot:right)
 				Transition(name="fade" mode="out-in")
 					.container(v-if="!isGameOver")
 						.main__info-card.info-card
-							.info-card__step {{`${step}/${Object.keys(info.main.info).length}`}}
+							.info-card__step {{`${step} / ${Object.keys(info.main.info).length}`}}
 
-							Transition(name="fade" mode="out-in")
-								AnswerVariant(v-if="isQuestion" :info="info" :step="step" @answer-click="onAnswerClick")
+							AnswerVariant(v-if="isQuestion" v-animate.fadeIn="" :info="info" :step="step" @answer-click="onAnswerClick")
 
-								Result(v-else :info="info" :current-answer="currentAnswer" @next-click="onNextClick")
+							Result(v-else v-animate.fadeIn="" :info="info" :current-answer="currentAnswer" @next-click="onNextClick")
 
 					GameOver(v-else :result="getResult" @repeat="onRepeatClick")
 
@@ -126,17 +122,12 @@
 	</script>
 
 	<style lang="scss" scoped>
-	.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-	}
-	.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-			opacity: 0
-	}
 		.page-game{
 			flex-grow: 1;
 			position: relative;
-			@include flex(flex, $dir: column);
 			background-color: $blue;
+
+			@include flex(flex, $dir: column);
 
 			&--header {
 				position: absolute;
@@ -214,6 +205,7 @@
 				transform: translateX(-50%);
 				width: rem(128);
 				height: rem(51);
+				z-index: 10;
 
 				@include breakpoint('md') {
 					transform: translateX(-25%);
@@ -232,6 +224,7 @@
 					left: 0;
 					width: 100%;
 					height: rem(426);
+					z-index: 10;
 					background: url("../assets/images/cabin-question.png") no-repeat;
 					background-size: cover;
 
@@ -255,7 +248,7 @@
 
 			.container {
         @include breakpoint('md') {
-          width: auto;
+					width: rem(456);
         }
       }
 		}
