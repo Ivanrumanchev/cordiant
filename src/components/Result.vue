@@ -74,7 +74,8 @@ export default {
 			margin: rem(40) auto 0 auto;
 			display: block;
 			width: rem(250);
-			font-weight: 700;
+
+			@include fs(16, 24, 700);
 
 			@include breakpoint('md') {
 				margin-left: 0;

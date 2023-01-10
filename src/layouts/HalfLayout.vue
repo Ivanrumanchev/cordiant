@@ -66,7 +66,7 @@ export default {
       &--right {
         @include breakpoint(md) {
           height: 100vh;
-          overflow: scroll;
+          overflow: auto;
         }
 
         @include breakpoint(xl) {

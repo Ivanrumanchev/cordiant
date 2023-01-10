@@ -5,12 +5,12 @@
 
 	ul.answer-variant__answer-list
 		li.answer-variant__answer-item(v-for="(answer, idx) of info.main.info['step-' + step]" :key="idx")
-			a.answer-variant__link(@click.prevent="onAnswerClick(answer)" v-html="answer.answer" qa_quiz_answer)
-
+			Button.answer-variant__button(@click.prevent="onAnswerClick(answer)" :info="{ text: answer.answer }" qa_quiz_answer)
 </template>
 	
 <script>
 import SvgEl from '@/core/SvgEl.vue';
+import Button from '@/core/Button.vue';
 
 export default {
 	name: 'answer-variant',
@@ -27,6 +27,7 @@ export default {
 	},
 
 	components: {
+		Button,
 		SvgEl,
 	},
 
@@ -82,14 +83,22 @@ export default {
 			}
 		}
 
-		&__link {
+		&__button {
 			display: block;
 			width: 100%;
 			height: 100%;
 			min-height: rem(82);
-			padding: rem(16) rem(20);
+			padding: rem(20) rem(8) rem(20) rem(16);
 			border-radius: 3px;
 			background-color: $answer-color;
+			color: $white;
+			text-align: start;
+			
+			@include fs(16, 24, 400);
+
+			@include breakpoint('md') {
+				padding: rem(16) rem(38) rem(18) rem(48);
+			}
 
 			&:hover {
 				background-color: $light-blue;
