@@ -79,6 +79,7 @@ export default {
 
   &__container {
     @include flex(flex, flex-start, space-between);
+    
     height: 100%;
   }
 
