@@ -40,10 +40,9 @@ export default {
 	.result {
 		&__result {
 			margin: rem(16) rem(16) rem(24) rem(16);
-
-			@include fs(18, 26, 700);
-
 			color: $white;
+			
+			@include fs(18, 26, 700);
 
 			@include breakpoint('md') {
 				margin-top: rem(85);

@@ -32,6 +32,7 @@ export default {
   overflow: hidden;
   box-shadow: 0 10px 10px -5px rgba($black, 0.15);
   background-color: $white;
+
   @include flex(flex, false, center);
 
   @include breakpoint(sm) {
@@ -89,6 +90,7 @@ export default {
 
   &__nav {
     @include flex(flex, flex-start, false, column);
+    
     padding: rem(30) 3px rem(30) rem(12);
     position: relative;
     z-index: 2;

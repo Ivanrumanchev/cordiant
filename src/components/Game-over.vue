@@ -95,10 +95,9 @@ export default {
 
 		&__description {
 			margin: rem(16) 0 rem(40) 0;
-
-			@include fs(18, 26, 700);
-
 			color: $white;
+			
+			@include fs(18, 26, 700);
 
 			@include breakpoint('md') {
 				margin-bottom: rem(16);
@@ -172,6 +171,7 @@ export default {
 
 		&__repeat {
 			@include flex(flex, center, center);
+
 			margin-bottom: rem(24);
 			gap: rem(16);
 
@@ -196,6 +196,7 @@ export default {
 			span {
 				font-family: 'roboto', $Arial;
 				color: $light-blue;
+				
 				@include fs(16, 24, 700);
 			}
 		}

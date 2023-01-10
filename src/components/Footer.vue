@@ -61,12 +61,14 @@ export default {
   }
 
   &__container {
-    text-align: center;
-    height: 100%;
     @include flex(flex, center, space-between, $dir: column);
+
+    height: 100%;
+    text-align: center;
 
     @include breakpoint(sm) {
       @include flex(flex, center, space-between, $dir: row);
+
       height: 100%;
       text-align: left;
     }
@@ -82,11 +84,12 @@ export default {
   }
 
   &__copyright {
+    @include flex(inline-flex, center);
+
     margin-top: rem(40);
+    color: $light-blue;
 
     @include fs(12, 15, 700);
-    @include flex(inline-flex, center);
-    color: $light-blue;
 
     @include breakpoint(sm) {
       align-self: flex-end;

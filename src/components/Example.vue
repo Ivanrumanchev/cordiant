@@ -282,16 +282,19 @@ export default {
 
   &__text {
     @include fs(16, 24);
+
     color: $black;
 
     &--modified {
       @include fs(18, 1.5);
+
       color: $lifehacker;
     }
   }
 
   &__buttons {
     @include flex($align:flex-start, $dir: column);
+    
     @include mediaProp(
       margin-top,
       $def: rem(15),

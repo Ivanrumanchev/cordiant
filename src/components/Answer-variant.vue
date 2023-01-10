@@ -71,6 +71,7 @@ export default {
 			@include breakpoint('md') {
 				padding-top: rem(20);
 				width: rem(456);
+				
 				@include fs(16, 26);
 			}
 		}
@@ -93,7 +94,7 @@ export default {
 			background-color: $answer-color;
 			color: $white;
 			text-align: start;
-			
+
 			@include fs(16, 24, 400);
 
 			@include breakpoint('md') {
